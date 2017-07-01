@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset ="UTF-8">
+	<title>Hangman</title>
+
+</head>
+<body>
+	<strong><h1>Press Any Key to Get Started!</h1></strong>
+	  <div class = "wrapper">	
+		<div id = "wins">Wins:</div>
+		<div id = "losses">Losses:</div>
+		<div id = "guessesLeft">Guesses Left:</div>
+		<div id ="guessedLetters"></div>
+		<div id ="buttons"></div>
+	  </div>
+	
+
+	<script type="text/javascript">
+		
+			var letters ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+
+		
+
+			var playerGuess = 10
+			var guessesHolder = [];
+			var guessesLeft = 10;
+			var wins = 0;
+			var losses = 0;
+			var letterToGuess = null;
+
+			var updateGuessesLeft = function() {
+				document.getElementById("#guessesLeft").innerHTML = "Guesses left: " + guessesLeft;
+			};
+
+			var updateLetterToGuess = function () {
+				this.letterToGuess = this.letters[Math.floor(Math.random() * this.letters.length)];
+
+			};
+
+			var updateGuessesSoFar = function () {
+				document.getElementById("guessedLetters").innerHTML = "Your guesses so far: " + guessesHolder.join(',');
+			}
+      
+     	 var letterToBeGuessed = letters[Math.floor(Math.random() * letters.length)];
+
+     	var reset = function() {
+
+     		guessesLeft = 10;
+     		guessesHolder = [];
+     		playerGuess = 10
+     	
+
+
+     	updateLetterToGuess();
+     	updateGuessesLeft();
+     	updateGuessesSoFar();
+     }
+
+     	updateLetterToGuess();
+     	updateLetterToGuess();
+
+      document.onkeyup = function(event) {
+
+      		guessesLeft --;
+
+      		document.getElementById("#guessesLeft").innerHTML = "You have " + guessesLeft + "guesses left."
+      		
+
+      	var keyPress = String.fromCharCode(event.keyCode).toLowerCase();
+      	
+      	guessesHolder.push(keyPress);
+      	
+
+      	if (letterToBeGuessed == userGuess) {
+
+      		wins ++;
+      		document.getElementById("#wins").innerHTML = "Wins: " + wins;
+      		alert("Congratulations");
+      		reset();
+
+
+
+      	}
+
+      	if (guessesLeft == 0) {
+
+      		losses++;
+      		document.getElementById("#losses").innerHTML = "Losses: " + losses;
+      		alert("Sorry try again!!");
+      		reset();
+      	}
+      }
+      
+      // for (i = 0; i < letters.length; i++) {
+      //   var letterBtn = $("<button>");
+      //   letterBtn.addClass("letter-button letter letter-button-color");
+      //   letterBtn.attr("data-letter", letters[i]);
+      //   letterBtn.text(letters[i]);
+      //   $("#buttons").append(letterBtn);
+
+      // }
+
+
+     
+
+
+
+   
+
+	</script>
+</body>
+</html>
